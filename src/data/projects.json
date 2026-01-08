@@ -1,0 +1,131 @@
+[
+  {
+    "slug": "cuphead-vertical-slice",
+    "title": "Cuphead-inspired Vertical Slice",
+    "subtitle": "Tight boss-focused combat prototype with hand-tuned patterns and responsive controls.",
+    "shortDescription": "Boss-centric vertical slice inspired by Cuphead, focused on readable patterns, tight inputs and quick iteration.",
+    "description": "Team project rebuilding a Cuphead-style level. Artists produced hand-drawn assets and programmers implemented core mechanics. My primary contribution was implementing moving-platform behaviour: platforms detect when the player stands on them, move down, wait, then return smoothly while maintaining correct collision and player attachment.",
+    "thumbnail": "/projects/cuphead-vertical-slice/cuphead-vertical-slice-cover.jpg",
+    "artGifs": ["/projects/cuphead-vertical-slice/art-01.gif"],
+    "codeGifs": ["/projects/cuphead-vertical-slice/code-01.gif"],
+    "gallery": [],
+    "tech": ["Unity", "C#", "State Machines", "Input System"],
+    "tags": ["Unity", "C#", "Game Dev"],
+    "github": "https://github.com/MarcosMartinsCarvalho/Vertical-slice-Cuphead/tree/main",
+    "features": [
+      "Boss AI that blends phase-based patterns with small reactive behaviours.",
+      "Precise movement and shooting tuned around frame-by-frame capture.",
+      "Config-driven attack patterns that designers can tweak without touching code.",
+      "Lightweight debug overlay for hitboxes, timings and iframes."
+    ],
+    "contribution": [
+      "Designed and implemented the full gameplay loop, from movement to boss logic.",
+      "Built a modular state machine system for boss behaviour and transitions.",
+      "Created tooling to quickly iterate on attack timings and difficulty.",
+      "Profiled and optimised update loops to keep the prototype responsive."
+    ],
+    "codeSnippets": [
+      {
+        "title": "Moving platform (player-triggered)",
+        "language": "csharp",
+        "code": "public class MovingPlatform : MonoBehaviour\n{\n    [SerializeField] private Vector3 downOffset = new Vector3(0, -1f, 0);\n    [SerializeField] private float downDuration = 0.25f;\n    [SerializeField] private float upDuration = 0.4f;\n    [SerializeField] private float waitTime = 0.6f;\n\n    private Vector3 _startPos;\n    private Coroutine _moveRoutine;\n\n    void Awake() => _startPos = transform.localPosition;\n\n    void OnCollisionEnter2D(Collision2D collision)\n    {\n        if (collision.collider.CompareTag(\"Player\") && _moveRoutine == null)\n            _moveRoutine = StartCoroutine(PlatformRoutine(collision.collider));\n    }\n\n    private IEnumerator PlatformRoutine(Collider2D player)\n    {\n        var target = _startPos + downOffset;\n        yield return StartCoroutine(LerpPosition(transform, _startPos, target, downDuration));\n\n        // Keep player attached while platform is moving\n        player.transform.SetParent(transform);\n        yield return new WaitForSeconds(waitTime);\n\n        yield return StartCoroutine(LerpPosition(transform, target, _startPos, upDuration));\n\n        // Detach player\n        player.transform.SetParent(null);\n        _moveRoutine = null;\n    }\n\n    private IEnumerator LerpPosition(Transform t, Vector3 a, Vector3 b, float duration)\n    {\n        float elapsed = 0f;\n        while (elapsed < duration)\n        {\n            t.localPosition = Vector3.Lerp(a, b, elapsed / duration);\n            elapsed += Time.deltaTime;\n            yield return null;\n        }\n        t.localPosition = b;\n    }\n}"
+      }
+    ]
+  },
+  {
+    "slug": "npc-ai-chatbot",
+    "title": "NPC AI Chatbot",
+    "subtitle": "Dialogue-driven NPC prototype combining behaviour trees with text generation.",
+    "shortDescription": "An experimental NPC sandbox where behaviour trees drive when and why characters talk, not just what they say.",
+    "description": "Solo project and my first substantial work using Python. A local NPC chat system where behaviour-driven decision logic determines when an NPC speaks while a local text layer generates responses. The project is designed to run fully offline (no paid APIs) and can be installed on a personal computer. The focus was on learning AI logic and enabling local execution rather than building polished art assets.",
+    "thumbnail": "/projects/npc-ai-chatbot/npc-ai-chatbot-cover.jpg",
+    "codeGifs": ["/projects/npc-ai-chatbot/code-01.gif"],
+    "gallery": [],
+    "tech": ["Unity", "C#", "Behaviour Trees", "Scriptable Objects"],
+    "tags": ["Unity", "C#", "Game AI"],
+    "github": "https://github.com/A3A9N/PrototypeAI",
+    "features": [
+      "Behaviour-tree driven decision making for when to speak or stay silent.",
+      "Blackboard-style memory system for tracking player context and world state.",
+      "Pluggable dialogue modules for different NPC archetypes.",
+      "Simple debug UI to visualise the active branch in the behaviour tree."
+    ],
+    "contribution": [
+      "Authored the behaviour tree framework used by all NPCs in the prototype.",
+      "Designed the data layout for blackboard entries and dialogue modules.",
+      "Implemented profiling hooks to understand performance cost of AI updates.",
+      "Iterated on UX to make behaviour debugging fast for designers."
+    ],
+    "codeSnippets": [
+      {
+        "title": "Behaviour tree node evaluation",
+        "language": "csharp",
+        "code": "public abstract class BtNode\n{\n    public abstract BtState Tick(BtContext context);\n}\n\npublic sealed class SequenceNode : BtNode\n{\n    private readonly BtNode[] _children;\n\n    public override BtState Tick(BtContext context)\n    {\n        foreach (var child in _children)\n        {\n            var state = child.Tick(context);\n            if (state != BtState.Success)\n                return state;\n        }\n        return BtState.Success;\n    }\n}"
+      }
+    ]
+  },
+  {
+    "slug": "tower-defense-lab",
+    "title": "Tower Defense Lab",
+    "subtitle": "Small tower defense sandbox focused on clean wave systems and targeting logic.",
+    "shortDescription": "A compact tower defense project to explore pathfinding, wave scripting and upgradeable towers.",
+    "description": "Solo project fully developed by me, including art and programming. A compact tower defense prototype where the player protects a village by placing normal and long-range archers, buying upgrades in a simple shop, and earning coins by defeating enemies. I implemented core systems such as enemy spawning, tower targeting, and the in-game shop.",
+    "thumbnail": "/projects/tower-defense-lab/tower-defense-lab-cover.jpg",
+    "codeGifs": ["/projects/tower-defense-lab/code-01.gif"],
+    "gallery": [],
+    "tech": ["Unity", "C#", "Pathfinding", "Scriptable Waves"],
+    "tags": ["Unity", "C#", "Game Dev"],
+    "github": "https://github.com/A3A9N/TowerdefenseAdukos",
+    "features": [
+      "Wave definitions stored as scriptable assets for quick tuning.",
+      "Simple but readable targeting logic for single-target and splash towers.",
+      "Enemy pathing through waypoints with support for future navmesh swap.",
+      "Lightweight UI for tower upgrades and range previews."
+    ],
+    "contribution": [
+      "Implemented the full wave system and enemy spawning logic.",
+      "Designed targeting priorities and data layout for towers.",
+      "Focused on making the codebase easy to read and extend for future tests."
+    ],
+    "codeSnippets": [
+      {
+        "title": "Tower targeting and shooting",
+        "language": "csharp",
+        "code": "public class Tower : MonoBehaviour\n{\n    [SerializeField] private float range = 5f;\n    [SerializeField] private float fireRate = 1f;\n    [SerializeField] private GameObject projectilePrefab;\n    private float _cooldown;\n\n    void Update()\n    {\n        _cooldown -= Time.deltaTime;\n        var target = FindTarget();\n        if (target != null && _cooldown <= 0f)\n        {\n            Shoot(target);\n            _cooldown = 1f / fireRate;\n        }\n    }\n\n    private Enemy FindTarget()\n    {\n        Enemy best = null;\n        float bestDist = float.MaxValue;\n        foreach (var e in FindObjectsOfType<Enemy>())\n        {\n            var d = Vector3.Distance(transform.position, e.transform.position);\n            if (d <= range && d < bestDist)\n            {\n                best = e;\n                bestDist = d;\n            }\n        }\n        return best;\n    }\n\n    private void Shoot(Enemy target)\n    {\n        var proj = Instantiate(projectilePrefab, transform.position, Quaternion.identity);\n        proj.GetComponent<Projectile>().Initialize(target.transform);\n    }\n}"
+      }
+    ]
+  },
+  {
+    "slug": "bossfight-prototype",
+    "title": "Bossfight Prototype",
+    "subtitle": "Fast iteration arena built to test combat readability and camera work.",
+    "shortDescription": "An arena-style bossfight prototype focused on timing, anticipation and camera motion rather than content size.",
+    "description": "Team project (mostly programmers) creating an arena boss fight in Unreal Engine. The encounter features a stone giant boss and a grappling mechanic. My primary responsibility was the knockback damage system: ensuring force application, player state changes and recovery after impacts. This was implemented and tuned using Unreal Blueprints.",
+    "thumbnail": "/projects/bossfight-prototype/bossfight-prototype-cover.jpg",
+    "codeGifs": ["/projects/bossfight-prototype/code-01.gif"],
+    "gallery": [],
+    "tech": ["Unity", "C#", "Cinemachine", "VFX Graph"],
+    "tags": ["Unity", "C#", "Game Dev"],
+    "github": "https://github.com/BAStudio/NeoNUnreal",
+    "features": [
+      "Camera shakes and framing tuned per attack type.",
+      "Anticipation timings tweaked to keep attacks readable.",
+      "Reusable hit-stop utility to sell impact without slowing gameplay.",
+      "Debug controls to replay specific patterns quickly."
+    ],
+    "contribution": [
+      "Developed combat scripts, camera helpers and debug tools.",
+      "Explored and tuned different anticipation timings and telegraphs.",
+      "Documented learnings and patterns for later reuse in other projects."
+    ],
+    "codeSnippets": [
+      {
+        "title": "Knockback damage (Blueprint logic)",
+        "language": "blueprint",
+        "code": "// Pseudocode / Blueprint node flow:\n// Event: OnTakeDamage(Damage, HitDirection, Force)\n// - If DamageType == Knockback:\n//     -> Apply Launch Character (Direction = HitDirection.Normalized * Force)\n//     -> Set Character State = 'Stunned'\n//     -> Play Knockback Animation\n//     -> Start Timer (RecoveryTime) -> OnTimer: Set Character State = 'Normal'\n//     -> Reduce player input while Stunned; re-enable after recovery\n// Notes: Use actor impulse for physics-based knockback or LaunchCharacter for pawn movement. Blend animation and root motion to avoid jitter when combining with physics."
+      }
+    ]
+  }
+]
+
+

@@ -1,0 +1,60 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-[#050509] text-slate-100 antialiased;
+}
+
+.page-shell {
+  @apply flex min-h-screen flex-col bg-gradient-to-b from-black via-[#050509] to-[#050509];
+}
+
+.page-container {
+  @apply mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8;
+}
+
+.gradient-hero {
+  background:
+    radial-gradient(circle at top left, rgba(56, 189, 248, 0.2), transparent 55%),
+    radial-gradient(circle at top right, rgba(59, 130, 246, 0.25), transparent 55%),
+    radial-gradient(circle at bottom, rgba(37, 99, 235, 0.35), transparent 60%);
+}
+
+.glass-panel {
+  @apply bg-white/5 backdrop-blur-2xl border border-white/10 rounded-3xl;
+}
+
+.text-logo {
+  @apply font-mono tracking-[0.3em] uppercase text-xs text-slate-400;
+}
+
+.card {
+  @apply glass-panel shadow-[0_18px_60px_rgba(0,0,0,0.55)] transition-transform transition-shadow duration-300;
+}
+
+.card-hover {
+  @apply hover:-translate-y-1.5 hover:shadow-[0_22px_80px_rgba(0,0,0,0.75)];
+}
+
+.muted {
+  @apply text-sm text-slate-400;
+}
+
+.section-title {
+  @apply text-xs font-semibold uppercase tracking-[0.3em] text-slate-400;
+}
+
+.aos-init {
+  opacity: 0;
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.aos-animate {
+  opacity: 1;
+}
+

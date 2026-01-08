@@ -1,0 +1,109 @@
+---
+import type { Project } from '../data/projects';
+import SkillBadge from './SkillBadge.astro';
+
+export interface Props {
+  project: Project;
+}
+
+const { project } = Astro.props;
+const isVideoProject = project.slug === 'cuphead-vertical-slice' || project.slug === 'bossfight-prototype';
+const previewGif = `/projects/${project.slug}/preview.gif`;
+const previewVideo = `/projects/${project.slug}/preview.mp4`;
+---
+
+<article
+  class="card card-hover flex flex-col overflow-hidden group"
+  data-project-slug={project.slug}
+>
+  <a href={`/projects/${project.slug}`} class="block">
+    <div class="relative aspect-video overflow-hidden">
+      <div
+        class="project-thumbnail h-full w-full bg-gradient-to-br from-slate-800 via-slate-900 to-black transition-opacity duration-300 ease-out group-hover:opacity-0"
+        style={`background-image:url('${project.thumbnail}'); background-size:cover; background-position:center;`}
+      />
+      {isVideoProject ? (
+        <video
+          src={previewVideo}
+          class="absolute inset-0 h-full w-full object-cover opacity-0 transition-opacity duration-300 ease-out group-hover:opacity-100"
+          muted
+          loop
+          playsinline
+          preload="metadata"
+          aria-label={project.title}
+        />
+      ) : (
+        <img
+          src={previewGif}
+          alt={project.title}
+          class="absolute inset-0 h-full w-full object-cover opacity-0 transition-opacity duration-300 ease-out group-hover:opacity-100"
+        />
+      )}
+      <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+    </div>
+  </a>
+
+  <div class="flex flex-1 flex-col gap-3 p-5">
+    <div>
+      <h3 class="text-base font-semibold text-white">
+        {project.title}
+      </h3>
+      <p class="mt-1 text-sm text-slate-400 line-clamp-2">
+        {project.shortDescription}
+      </p>
+    </div>
+
+    <div class="mt-auto space-y-3">
+      <div class="flex flex-wrap gap-1.5">
+        {(project.tags || project.tech).slice(0, 4).map((tag) => (
+          <SkillBadge label={tag} />
+        ))}
+      </div>
+      <a
+        href={`/projects/${project.slug}`}
+        class="inline-flex items-center gap-1 text-xs font-medium text-sky-300 transition-colors hover:text-sky-200"
+      >
+        View details
+        <svg class="h-3 w-3 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg>
+      </a>
+    </div>
+  </div>
+</article>
+
+{isVideoProject && (
+  <script is:inline define:vars={{ projectSlug: project.slug }}>
+    (() => {
+      function initVideo() {
+        const article = document.querySelector(`article[data-project-slug="${projectSlug}"]`);
+        if (!article) {
+          setTimeout(initVideo, 50);
+          return;
+        }
+        
+        const video = article.querySelector('video');
+        if (!video) return;
+        
+        const handleMouseEnter = () => {
+          video.currentTime = 0;
+          video.play().catch(() => {});
+        };
+        
+        const handleMouseLeave = () => {
+          video.pause();
+          video.currentTime = 0;
+        };
+        
+        article.addEventListener('mouseenter', handleMouseEnter);
+        article.addEventListener('mouseleave', handleMouseLeave);
+      }
+      
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initVideo);
+      } else {
+        initVideo();
+      }
+    })();
+  </script>
+)}

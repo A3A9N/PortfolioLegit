@@ -1,0 +1,157 @@
+---
+// ABOUT PAGE
+// 
+// CV FILE LOCATION:
+// Place your CV PDF file at: public/cv/Adrian-Marin-CV.pdf
+// The download button will automatically link to /cv/Adrian-Marin-CV.pdf
+//
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import AnimatedSection from '../components/AnimatedSection.astro';
+import SkillBadge from '../components/SkillBadge.astro';
+
+const skills = {
+  engines: ['Unity', 'Unreal Engine'],
+  languages: ['C#', 'JavaScript', 'HTML', 'Python (basic)', 'C++ (basic)'],
+  specialties: ['AI for Games', 'Gameplay Programming', 'UI/UX for Games', 'Web development'],
+  tools: ['Git', 'GitHub', 'Version Control', 'Astro', 'Tailwind CSS']
+};
+---
+
+<BaseLayout title="About" description="Learn more about Adrian Marin, software and game development student focused on AI and interactive technology.">
+  <div class="page-shell">
+    <Header />
+
+    <main class="flex-1">
+      <section class="page-container py-16 md:py-24">
+        <AnimatedSection>
+          <div class="mx-auto max-w-4xl space-y-16">
+            <!-- Intro Section -->
+            <div class="space-y-6">
+              <div>
+                <p class="section-title">About</p>
+                <h1 class="mt-4 text-4xl font-semibold tracking-tight text-white md:text-5xl">
+                  Adrian Marin
+                </h1>
+                <p class="mt-3 text-lg text-slate-300">
+                  Software Development & Game Development student
+                </p>
+              </div>
+
+              <div class="space-y-4">
+                <p class="text-base leading-relaxed text-slate-200 md:text-lg">
+                  I'm a passionate software and game development student with a strong focus on interactive technology and AI in games. I'm a fast learner who thrives on tackling new technologies and continuously improving my skills.
+                </p>
+              </div>
+            </div>
+
+            <!-- Personal Story Section -->
+            <div class="card space-y-4 p-8 md:p-10">
+              <h2 class="text-xs font-semibold uppercase tracking-[0.22em] text-slate-400">
+                My Journey
+              </h2>
+              <p class="text-sm leading-relaxed text-slate-200 md:text-base">
+                Born in Valencia, Spain, I moved to the Netherlands 7 years ago. Starting from zero, I learned Dutch while adapting to a new culture. Now studying software and game development in Amsterdam, my journey demonstrates resilience, adaptability, and determination — qualities I bring to every project and team.
+              </p>
+            </div>
+
+            <!-- Selling Points Section -->
+            <div class="card space-y-6 p-8 md:p-10">
+              <h2 class="text-xs font-semibold uppercase tracking-[0.22em] text-slate-400">
+                Why hire me
+              </h2>
+              <ul class="space-y-3">
+                <li class="flex items-start gap-3 text-sm text-slate-200">
+                  <span class="mt-1 text-sky-400">•</span>
+                  <span>Fast learner with proven ability to pick up new technologies quickly</span>
+                </li>
+                <li class="flex items-start gap-3 text-sm text-slate-200">
+                  <span class="mt-1 text-sky-400">•</span>
+                  <span>Strong problem-solving skills applied to real projects</span>
+                </li>
+                <li class="flex items-start gap-3 text-sm text-slate-200">
+                  <span class="mt-1 text-sky-400">•</span>
+                  <span>Deep passion for AI in games and interactive systems</span>
+                </li>
+                <li class="flex items-start gap-3 text-sm text-slate-200">
+                  <span class="mt-1 text-sky-400">•</span>
+                  <span>Team-oriented collaborator who also works independently when needed</span>
+                </li>
+                <li class="flex items-start gap-3 text-sm text-slate-200">
+                  <span class="mt-1 text-sky-400">•</span>
+                  <span>Always improving and open to feedback</span>
+                </li>
+                <li class="flex items-start gap-3 text-sm text-slate-200">
+                  <span class="mt-1 text-sky-400">•</span>
+                  <span>Highly motivated and reliable for internships</span>
+                </li>
+              </ul>
+            </div>
+
+            <!-- Skills Section -->
+            <div class="card space-y-6 p-8 md:p-10">
+              <h2 class="text-xs font-semibold uppercase tracking-[0.22em] text-slate-400">
+                Skills & Technologies
+              </h2>
+              
+              <div class="grid gap-6 md:grid-cols-2">
+                <div class="space-y-3">
+                  <p class="text-xs font-medium text-slate-400">Game Engines</p>
+                  <div class="flex flex-wrap gap-2">
+                    {skills.engines.map((skill) => (
+                      <SkillBadge label={skill} />
+                    ))}
+                  </div>
+                </div>
+
+                <div class="space-y-3">
+                  <p class="text-xs font-medium text-slate-400">Programming Languages</p>
+                  <div class="flex flex-wrap gap-2">
+                    {skills.languages.map((skill) => (
+                      <SkillBadge label={skill} />
+                    ))}
+                  </div>
+                </div>
+
+                <div class="space-y-3">
+                  <p class="text-xs font-medium text-slate-400">Specialties</p>
+                  <div class="flex flex-wrap gap-2">
+                    {skills.specialties.map((skill) => (
+                      <SkillBadge label={skill} />
+                    ))}
+                  </div>
+                </div>
+
+                <div class="space-y-3">
+                  <p class="text-xs font-medium text-slate-400">Tools</p>
+                  <div class="flex flex-wrap gap-2">
+                    {skills.tools.map((skill) => (
+                      <SkillBadge label={skill} />
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- CV Download Button -->
+            <div class="flex justify-center">
+              <a
+                href="/cv/Adrian-Marin-CV.pdf"
+                download
+                class="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold uppercase tracking-[0.16em] text-slate-900 transition-all hover:bg-slate-100 hover:scale-105"
+              >
+                Download CV
+                <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                </svg>
+              </a>
+            </div>
+          </div>
+        </AnimatedSection>
+      </section>
+    </main>
+
+    <Footer />
+  </div>
+</BaseLayout>

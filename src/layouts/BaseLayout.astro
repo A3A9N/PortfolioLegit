@@ -1,0 +1,68 @@
+---
+import '../styles/global.css';
+
+export interface Props {
+  title?: string;
+  description?: string;
+  ogImage?: string;
+}
+
+const {
+  title = 'Adrian Marin – Game Developer',
+  description = 'Minimal, focused portfolio of a gameplay and AI-focused game developer.',
+  ogImage = '/og-default.png'
+} = Astro.props;
+
+const fullTitle = `${title} | Portfolio`;
+---
+
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png" />
+    <link rel="icon" type="image/png" sizes="64x64" href="/favicon.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon.png" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <script type="application/ld+json">
+      {JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'Person',
+        name: 'Adrian Marin',
+        jobTitle: 'Software & Game Developer',
+        url: Astro.site?.toString() ?? '',
+        sameAs: [
+          'https://github.com/A3A9N',
+          'https://www.linkedin.com/in/a3marin/'
+        ]
+      })}
+    </script>
+
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
+
+    <script defer src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+    <script is:inline>
+      window.addEventListener('load', () => {
+        // @ts-ignore
+        if (window.AOS) window.AOS.init({ once: true, duration: 650, easing: 'ease-out-cubic' });
+      });
+    </script>
+  </head>
+  <body class="min-h-screen bg-[#050509] text-slate-100">
+    <slot />
+  </body>
+</html>
+

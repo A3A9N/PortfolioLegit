@@ -1,0 +1,51 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import HeroSection from '../components/HeroSection.astro';
+import AnimatedSection from '../components/AnimatedSection.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import ScrollToTop from '../components/ScrollToTop.astro';
+import { projects } from '../data/projects';
+
+const featured = projects.slice(0, 3);
+---
+
+<BaseLayout title="Homepage">
+  <div class="page-shell">
+    <Header />
+
+    <main class="flex-1">
+      <HeroSection />
+
+      <section class="page-container py-14">
+        <div class="mb-8 flex items-end justify-between gap-4">
+          <div>
+            <p class="section-title">Selected projects</p>
+            <h2 class="mt-3 text-xl font-semibold text-white">
+              Built to learn, tuned to ship.
+            </h2>
+          </div>
+          <a
+            href="/projects"
+            class="hidden text-xs font-semibold uppercase tracking-[0.2em] text-sky-300 hover:text-sky-200 md:inline-flex"
+          >
+            View all
+          </a>
+        </div>
+
+        <AnimatedSection as="div">
+          <div class="grid gap-5 md:grid-cols-3">
+            {featured.map((project) => (
+              <ProjectCard project={project} />
+            ))}
+          </div>
+        </AnimatedSection>
+      </section>
+    </main>
+
+    <Footer />
+    <ScrollToTop />
+  </div>
+</BaseLayout>
+

@@ -1,0 +1,31 @@
+---
+const year = new Date().getFullYear();
+---
+
+<footer class="border-t border-white/10 bg-slate-950/80 text-slate-400">
+  <div class="mx-auto flex max-w-6xl flex-col gap-4 px-4 py-8 text-xs sm:flex-row sm:items-center sm:justify-between sm:px-6 lg:px-8">
+    <div>
+      <p class="font-mono tracking-[0.25em] uppercase text-[10px] text-slate-500">
+        Gameplay Programmer
+      </p>
+      <p class="mt-1 text-slate-400">
+        Built with Astro, TailwindCSS and a lot of playtesting.
+      </p>
+    </div>
+    <div class="flex flex-col items-start gap-2 sm:items-end">
+      <div class="flex gap-3 text-slate-400">
+        <a href="https://github.com/A3A9N" class="hover:text-brand-soft transition">
+          GitHub
+        </a>
+        <a href="https://www.linkedin.com/in/a3marin/" class="hover:text-brand-soft transition">
+          LinkedIn
+        </a>
+      </div>
+      <p class="text-[11px] text-slate-600">
+        © {year} Adrian Marin. All rights reserved.
+      </p>
+    </div>
+  </div>
+</footer>
+
+

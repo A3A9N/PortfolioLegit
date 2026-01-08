@@ -1,0 +1,40 @@
+{
+  "intro": {
+    "title": "Over mij",
+    "heading": "Adrian Marin",
+    "subtitle": "Software Development & Game Development student",
+    "description": "Ik ben een gepassioneerde software- en game development student met een sterke focus op interactieve technologie en AI in games. Ik leer snel en geniet van het aanpakken van nieuwe technologieën en het continu verbeteren van mijn vaardigheden."
+  },
+  "story": {
+    "title": "Mijn reis",
+    "content": "Geboren in Valencia, Spanje, ben ik 7 jaar geleden naar Nederland verhuisd. Vanaf nul heb ik Nederlands geleerd terwijl ik me aanpaste aan een nieuwe cultuur. Nu studeer ik software- en game development in Amsterdam. Mijn reis toont veerkracht, aanpassingsvermogen en vastberadenheid — kwaliteiten die ik meebreng naar elk project en team."
+  },
+  "sellingPoints": {
+    "title": "Waarom mij aannemen",
+    "points": [
+      "Snelle leerling met bewezen vermogen om snel nieuwe technologieën op te pikken",
+      "Sterke probleemoplossende vaardigheden toegepast op echte projecten",
+      "Diepe passie voor AI in games en interactieve systemen",
+      "Teamgerichte medewerker die ook zelfstandig werkt wanneer nodig",
+      "Altijd bezig met verbeteren en open voor feedback",
+      "Zeer gemotiveerd en betrouwbaar voor stages"
+    ]
+  },
+  "skills": {
+    "title": "Vaardigheden & Technologieën",
+    "categories": {
+      "engines": "Game Engines",
+      "languages": "Programmeertalen",
+      "specialties": "Specialiteiten",
+      "tools": "Tools"
+    }
+  },
+  "cv": {
+    "button": "CV Downloaden"
+  },
+  "language": {
+    "switch": "Wissel naar Engels",
+    "current": "NL"
+  }
+}
+

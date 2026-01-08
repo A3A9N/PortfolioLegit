@@ -1,0 +1,38 @@
+---
+const navLinks = [
+  { href: '/projects', label: 'Projects' },
+  { href: '/about', label: 'About' },
+  { href: '/contact', label: 'Contact' },
+  { href: '/cv', label: 'CV' }
+];
+---
+
+<header class="sticky top-0 z-40 border-b border-white/10 bg-black/70 backdrop-blur-2xl">
+  <nav class="page-container flex items-center justify-between py-3">
+    <a href="/" class="flex items-center gap-3">
+      <div class="h-8 w-8 rounded-2xl bg-gradient-to-br from-sky-500 to-blue-600 shadow-[0_12px_40px_rgba(37,99,235,0.7)]" />
+      <div>
+        <div class="text-logo">Adrian Marin</div>
+        <p class="text-[11px] font-medium text-slate-300">
+          Software Developer · Game AI
+        </p>
+      </div>
+    </a>
+
+    <div class="flex items-center gap-6">
+      <ul class="hidden items-center gap-5 text-sm text-slate-300 md:flex">
+        {navLinks.map((item) => (
+          <li>
+            <a
+              href={item.href}
+              class="relative pb-1 transition-colors hover:text-white after:absolute after:left-0 after:bottom-0 after:h-[1.5px] after:w-0 after:bg-sky-400 after:transition-all hover:after:w-full"
+            >
+              {item.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </nav>
+</header>
+

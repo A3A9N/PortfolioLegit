@@ -1,0 +1,18 @@
+---
+export interface Props {
+  as?: keyof HTMLElementTagNameMap;
+  delay?: number;
+}
+
+const { as: Tag = 'section', delay = 0 } = Astro.props;
+---
+
+<Tag
+  class="w-full"
+  data-aos="fade-up"
+  data-aos-delay={String(delay)}
+>
+  <slot />
+</Tag>
+
+
